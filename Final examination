@@ -1,1 +1,43 @@
+#Sample Problem 1
+P_Disease = 0.01
+P_NoDisease = 0.99
+P_Positive_given_Disease = 0.99
+P_Positive_given_NoDisease = 0.05
+
+P_Positive = (P_Positive_given_Disease * P_Disease) + (P_Positive_given_NoDisease * P_NoDisease)
+P_Disease_given_Positive = (P_Positive_given_Disease * P_Disease) / P_Positive
+
+print(f"Probability of having the disease given a positive test: {P_Disease_given_Positive:.4f}")
+
+#Sample Problem 2
+P_Spam = 0.2
+P_NotSpam = 0.8
+P_Free_given_Spam = 0.6
+P_Free_given_NotSpam = 0.1
+
+P_Free = (P_Free_given_Spam * P_Spam) + (P_Free_given_NotSpam * P_NotSpam)
+P_Spam_given_Free = (P_Free_given_Spam * P_Spam) / P_Free
+
+print(f"Probability that an email is spam given it contains 'free': {P_Spam_given_Free:.4f}")
+
+#Sample Problem 3
+priors = {
+    0.5: 0.5,
+    0.6: 0.25,
+    0.8: 0.25
+}
+
+likelihoods = {
+    0.5: 0.5,
+    0.6: 0.6,
+    0.8: 0.8
+}
+
+evidence = sum(likelihoods[hyp] * priors[hyp] for hyp in priors)
+
+posterior = {hyp: (likelihoods[hyp] * priors[hyp]) / evidence for hyp in priors}
+
+print("Posterior probabilities after observing 1 head:")
+for hyp, prob in posterior.items():
+    print(f"P(heads={hyp}) = {prob:.4f}")
 
